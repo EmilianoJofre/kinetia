@@ -1,0 +1,18 @@
+# Variables de entorno con secretos — NUNCA commitear
+.env.prod
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+apps/web/dist/
+
+# Rails
+apps/api/tmp/
+apps/api/log/
+apps/api/*.log
+apps/api/storage/
+apps/api/.bundle/
+
+# macOS
+.DS_Store
