@@ -129,7 +129,7 @@ export default function EquipoDetail() {
                 <div className="flex items-center gap-4">
                   <span className="text-sm font-medium">{p.equipo_local}</span>
                   <span className="text-lg font-bold text-text-primary">
-                    {p.goles_local} — {p.goles_visitante}
+                    {p.puntos_local} — {p.puntos_visitante}
                   </span>
                   <span className="text-sm font-medium">{p.equipo_visitante}</span>
                 </div>

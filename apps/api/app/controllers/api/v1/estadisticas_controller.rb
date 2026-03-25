@@ -45,7 +45,13 @@ module Api
       end
 
       def estadistica_params
-        params.require(:estadistica_jugador).permit(:jugador_id, :partido_id, :minutos_jugados, :goles, :asistencias, :tarjetas_amarillas, :tarjetas_rojas, :rating)
+        params.require(:estadistica_jugador).permit(
+          :jugador_id, :partido_id, :minutos_jugados,
+          :tries, :conversiones, :goles_de_penal, :drops,
+          :tackles, :tackles_fallidos, :turnovers_ganados,
+          :pases, :acarreos, :metros_ganados,
+          :tarjeta_amarilla, :tarjeta_roja
+        )
       end
     end
   end

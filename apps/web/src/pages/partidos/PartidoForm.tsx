@@ -22,8 +22,9 @@ export default function PartidoForm() {
     equipo_local_id: '',
     equipo_visitante_id: '',
     fecha: '',
-    goles_local: '0',
-    goles_visitante: '0',
+    puntos_local: '0',
+    puntos_visitante: '0',
+    competicion: '',
     estado: 'programado'
   })
 
@@ -41,8 +42,9 @@ export default function PartidoForm() {
         equipo_local_id: String(partido.equipo_local_id || ''),
         equipo_visitante_id: String(partido.equipo_visitante_id || ''),
         fecha: partido.fecha ? partido.fecha.slice(0, 16) : '',
-        goles_local: String(partido.goles_local ?? 0),
-        goles_visitante: String(partido.goles_visitante ?? 0),
+        puntos_local: String(partido.puntos_local ?? 0),
+        puntos_visitante: String(partido.puntos_visitante ?? 0),
+        competicion: partido.competicion || '',
         estado: partido.estado || 'programado'
       })
     }
@@ -62,8 +64,8 @@ export default function PartidoForm() {
       ...form,
       equipo_local_id: Number(form.equipo_local_id),
       equipo_visitante_id: Number(form.equipo_visitante_id),
-      goles_local: Number(form.goles_local),
-      goles_visitante: Number(form.goles_visitante)
+      puntos_local: Number(form.puntos_local),
+      puntos_visitante: Number(form.puntos_visitante)
     })
   }
 
@@ -110,25 +112,35 @@ export default function PartidoForm() {
               </select>
             </div>
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Competición</label>
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Ej: Liga Nacional, Copa Regional"
+              value={form.competicion}
+              onChange={e => setForm({ ...form, competicion: e.target.value })}
+            />
+          </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Goles local</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Puntos local</label>
               <input
                 type="number"
                 min="0"
                 className="input-field"
-                value={form.goles_local}
-                onChange={e => setForm({ ...form, goles_local: e.target.value })}
+                value={form.puntos_local}
+                onChange={e => setForm({ ...form, puntos_local: e.target.value })}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Goles visitante</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Puntos visitante</label>
               <input
                 type="number"
                 min="0"
                 className="input-field"
-                value={form.goles_visitante}
-                onChange={e => setForm({ ...form, goles_visitante: e.target.value })}
+                value={form.puntos_visitante}
+                onChange={e => setForm({ ...form, puntos_visitante: e.target.value })}
               />
             </div>
             <div>

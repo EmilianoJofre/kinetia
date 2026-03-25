@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_01_000008) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_24_000010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,13 +28,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_01_000008) do
     t.bigint "jugador_id", null: false
     t.bigint "partido_id", null: false
     t.integer "minutos_jugados", default: 0
-    t.integer "goles", default: 0
-    t.integer "asistencias", default: 0
-    t.integer "tarjetas_amarillas", default: 0
-    t.integer "tarjetas_rojas", default: 0
-    t.decimal "rating", precision: 3, scale: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tries", default: 0, null: false
+    t.integer "conversiones", default: 0, null: false
+    t.integer "goles_de_penal", default: 0, null: false
+    t.integer "drops", default: 0, null: false
+    t.integer "tackles", default: 0, null: false
+    t.integer "tackles_fallidos", default: 0, null: false
+    t.integer "turnovers_ganados", default: 0, null: false
+    t.integer "pases", default: 0, null: false
+    t.integer "acarreos", default: 0, null: false
+    t.integer "metros_ganados", default: 0, null: false
+    t.boolean "tarjeta_amarilla", default: false, null: false
+    t.boolean "tarjeta_roja", default: false, null: false
     t.index ["jugador_id"], name: "index_estadisticas_jugador_on_jugador_id"
     t.index ["partido_id"], name: "index_estadisticas_jugador_on_partido_id"
   end
@@ -85,12 +92,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_01_000008) do
   create_table "partidos", force: :cascade do |t|
     t.bigint "equipo_local_id", null: false
     t.bigint "equipo_visitante_id", null: false
-    t.integer "goles_local", default: 0
-    t.integer "goles_visitante", default: 0
+    t.integer "puntos_local", default: 0
+    t.integer "puntos_visitante", default: 0
     t.datetime "fecha"
     t.string "estado", default: "programado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "competicion"
     t.index ["equipo_local_id"], name: "index_partidos_on_equipo_local_id"
     t.index ["equipo_visitante_id"], name: "index_partidos_on_equipo_visitante_id"
   end

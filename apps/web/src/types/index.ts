@@ -42,8 +42,9 @@ export interface Partido {
   equipo_visitante_id: number
   equipo_local?: string
   equipo_visitante?: string
-  goles_local: number
-  goles_visitante: number
+  puntos_local: number
+  puntos_visitante: number
+  competicion?: string
   fecha: string
   estado: 'programado' | 'en_curso' | 'finalizado'
   created_at: string
@@ -55,13 +56,19 @@ export interface EstadisticaJugador {
   jugador_id: number
   partido_id: number
   jugador?: string
-  fecha?: string
   minutos_jugados: number
-  goles: number
-  asistencias: number
-  tarjetas_amarillas: number
-  tarjetas_rojas: number
-  rating: number
+  tries: number
+  conversiones: number
+  goles_de_penal: number
+  drops: number
+  tackles: number
+  tackles_fallidos: number
+  turnovers_ganados: number
+  pases: number
+  acarreos: number
+  metros_ganados: number
+  tarjeta_amarilla: boolean
+  tarjeta_roja: boolean
 }
 
 export interface EvaluacionFisica {
@@ -102,11 +109,11 @@ export interface DashboardData {
   metricas: {
     total_jugadores: number
     partidos_jugados: number
-    promedio_rendimiento: number
+    promedio_tries_por_partido: number
     lesiones_activas: number
   }
-  rendimiento_equipo: Array<{ fecha: string; rendimiento: number; goles: number }>
-  top_jugadores: Array<{ nombre: string; posicion: string; rating: number }>
+  rendimiento_equipo: Array<{ fecha: string; tries: number; puntos: number }>
+  top_jugadores: Array<{ nombre: string; posicion: string; tries: number; tackles: number; impacto: number }>
   resultados_partidos: Array<{ name: string; value: number }>
   evolucion_fisica: Array<{ fecha: string; peso: number; velocidad: number }>
 }

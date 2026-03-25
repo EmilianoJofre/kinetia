@@ -58,7 +58,7 @@ export default function PartidosList() {
       key: 'resultado', header: 'Resultado', render: (p: Partido) => (
         p.estado === 'programado'
           ? <span className="text-gray-400 text-sm">—</span>
-          : <span className="font-bold text-lg text-text-primary">{p.goles_local} — {p.goles_visitante}</span>
+          : <span className="font-bold text-lg text-text-primary">{p.puntos_local} — {p.puntos_visitante}</span>
       )
     },
     {

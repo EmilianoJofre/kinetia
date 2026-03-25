@@ -44,11 +44,11 @@ export default function Dashboard() {
           trendUp={true}
         />
         <MetricCard
-          title="Promedio Rendimiento"
-          value={`${data.metricas.promedio_rendimiento}/10`}
+          title="Tries por Partido"
+          value={data.metricas.promedio_tries_por_partido}
           icon={Activity}
-          trend="rating promedio"
-          trendUp={data.metricas.promedio_rendimiento >= 7}
+          trend="promedio esta temporada"
+          trendUp={data.metricas.promedio_tries_por_partido >= 3}
         />
         <MetricCard
           title="Lesiones Activas"
@@ -61,15 +61,15 @@ export default function Dashboard() {
 
       {/* Charts row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ChartCard title="Rendimiento del Equipo (últimos partidos)">
+        <ChartCard title="Producción por Partido (últimos partidos)">
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={data.rendimiento_equipo}>
               <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
               <XAxis dataKey="fecha" tick={{ fontSize: 11 }} />
-              <YAxis domain={[0, 10]} tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
-              <Line type="monotone" dataKey="rendimiento" stroke="#18DAAE" strokeWidth={2} dot={{ fill: '#18DAAE' }} name="Rating" />
-              <Line type="monotone" dataKey="goles" stroke="#2563EB" strokeWidth={2} dot={{ fill: '#2563EB' }} name="Goles" />
+              <Line type="monotone" dataKey="tries" stroke="#18DAAE" strokeWidth={2} dot={{ fill: '#18DAAE' }} name="Tries" />
+              <Line type="monotone" dataKey="puntos" stroke="#2563EB" strokeWidth={2} dot={{ fill: '#2563EB' }} name="Puntos" />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
@@ -99,14 +99,15 @@ export default function Dashboard() {
 
       {/* Charts row 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ChartCard title="Top Jugadores por Rating">
+        <ChartCard title="Top Jugadores por Impacto">
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.top_jugadores} layout="vertical" margin={{ left: 80 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis type="number" domain={[0, 10]} tick={{ fontSize: 11 }} />
+              <XAxis type="number" tick={{ fontSize: 11 }} />
               <YAxis dataKey="nombre" type="category" tick={{ fontSize: 10 }} width={80} />
               <Tooltip />
-              <Bar dataKey="rating" fill="#18DAAE" radius={[0, 4, 4, 0]} name="Rating" />
+              <Bar dataKey="tries" stackId="a" fill="#18DAAE" radius={[0, 0, 0, 0]} name="Tries" />
+              <Bar dataKey="tackles" stackId="a" fill="#2563EB" radius={[0, 4, 4, 0]} name="Tackles" />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>

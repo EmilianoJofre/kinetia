@@ -6,39 +6,41 @@ module Api
         partidos_jugados = Partido.where(estado: 'finalizado').count
         lesiones_activas = Lesion.where(estado: 'activa').count
 
-        ratings = EstadisticaJugador.where.not(rating: nil).pluck(:rating)
-        promedio_rendimiento = ratings.any? ? (ratings.sum / ratings.count.to_f).round(2) : 0
+        # Promedio de tries por partido como indicador de rendimiento ofensivo
+        total_tries = EstadisticaJugador.sum(:tries)
+        promedio_tries = partidos_jugados > 0 ? (total_tries.to_f / partidos_jugados).round(2) : 0
 
-        # Performance over last 10 matches
+        # Rendimiento por partido: tries anotados + puntos totales
         ultimos_partidos = Partido.where(estado: 'finalizado').order(fecha: :desc).limit(10).reverse
         rendimiento_equipo = ultimos_partidos.map do |p|
-          ratings_partido = EstadisticaJugador.where(partido_id: p.id).pluck(:rating).compact
-          avg = ratings_partido.any? ? (ratings_partido.sum / ratings_partido.count.to_f).round(2) : 0
+          tries_partido = EstadisticaJugador.where(partido_id: p.id).sum(:tries)
           {
             fecha: p.fecha.strftime('%d/%m'),
-            rendimiento: avg,
-            goles: p.goles_local.to_i + p.goles_visitante.to_i
+            tries: tries_partido,
+            puntos: p.puntos_local.to_i + p.puntos_visitante.to_i
           }
         end
 
-        # Top 10 players by average rating
-        top_jugadores = Jugador.where(activo: true).limit(10).map do |j|
-          stats = EstadisticaJugador.where(jugador_id: j.id).pluck(:rating).compact
-          avg = stats.any? ? (stats.sum / stats.count.to_f).round(2) : 0
+        # Top 10 jugadores por impacto (tries + tackles)
+        top_jugadores = Jugador.where(activo: true).map do |j|
+          stats = EstadisticaJugador.where(jugador_id: j.id)
+          tries_total   = stats.sum(:tries)
+          tackles_total = stats.sum(:tackles)
           {
             nombre: "#{j.nombre} #{j.apellido}",
             posicion: j.posicion,
-            rating: avg
+            tries: tries_total,
+            tackles: tackles_total,
+            impacto: tries_total + tackles_total
           }
-        end.sort_by { |j| -j[:rating] }.first(10)
+        end.sort_by { |j| -j[:impacto] }.first(10)
 
-        # Match results pie chart
+        # Resultados de partidos por puntos
         victorias = 0; empates = 0; derrotas = 0
-        partidos_finalizados = Partido.where(estado: 'finalizado')
-        partidos_finalizados.each do |p|
-          gl = p.goles_local.to_i; gv = p.goles_visitante.to_i
-          if gl > gv then victorias += 1
-          elsif gl == gv then empates += 1
+        Partido.where(estado: 'finalizado').each do |p|
+          pl = p.puntos_local.to_i; pv = p.puntos_visitante.to_i
+          if pl > pv then victorias += 1
+          elsif pl == pv then empates += 1
           else derrotas += 1
           end
         end
@@ -48,7 +50,7 @@ module Api
           { name: 'Derrotas', value: derrotas }
         ]
 
-        # Physical evolution (last 6 evaluations avg)
+        # Evolución física (últimas 30 evaluaciones agrupadas de a 5)
         evolucion_fisica = EvaluacionFisica.order(fecha: :desc).limit(30).reverse.each_slice(5).map do |grupo|
           {
             fecha: grupo.last[:fecha].strftime('%b'),
@@ -61,7 +63,7 @@ module Api
           metricas: {
             total_jugadores: total_jugadores,
             partidos_jugados: partidos_jugados,
-            promedio_rendimiento: promedio_rendimiento,
+            promedio_tries_por_partido: promedio_tries,
             lesiones_activas: lesiones_activas
           },
           rendimiento_equipo: rendimiento_equipo,

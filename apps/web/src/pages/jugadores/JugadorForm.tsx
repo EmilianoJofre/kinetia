@@ -6,7 +6,18 @@ import { getEquipos } from '../../api/equipos'
 import PageHeader from '../../components/shared/PageHeader'
 import LoadingSpinner from '../../components/shared/LoadingSpinner'
 
-const POSICIONES = ['portero', 'defensa', 'mediocampista', 'delantero']
+const POSICIONES: { value: string; label: string }[] = [
+  { value: 'prop_pilar',             label: 'Prop / Pilar' },
+  { value: 'hooker_talonador',       label: 'Hooker / Talonador' },
+  { value: 'lock_segunda_linea',     label: 'Lock / Segunda línea' },
+  { value: 'flanker_ala',            label: 'Flanker / Ala' },
+  { value: 'numero_8',               label: 'Número 8' },
+  { value: 'scrum_half_medio_scrum', label: 'Scrum-half / Medio scrum' },
+  { value: 'fly_half_apertura',      label: 'Fly-half / Apertura' },
+  { value: 'center_centro',          label: 'Center / Centro' },
+  { value: 'wing_ala',               label: 'Wing / Ala' },
+  { value: 'fullback_zaguero',       label: 'Fullback / Zaguero' },
+]
 
 export default function JugadorForm() {
   const { id } = useParams<{ id: string }>()
@@ -15,7 +26,7 @@ export default function JugadorForm() {
   const isEdit = !!id
 
   const [form, setForm] = useState({
-    nombre: '', apellido: '', posicion: 'defensa', edad: '', altura: '', peso: '', numero: '', equipo_id: '', activo: true
+    nombre: '', apellido: '', posicion: 'prop_pilar', edad: '', altura: '', peso: '', numero: '', equipo_id: '', activo: true
   })
 
   const { data: jugador, isLoading: loadingJugador } = useQuery({
@@ -30,7 +41,7 @@ export default function JugadorForm() {
       setForm({
         nombre: jugador.nombre,
         apellido: jugador.apellido,
-        posicion: jugador.posicion || 'defensa',
+        posicion: jugador.posicion || 'prop_pilar',
         edad: String(jugador.edad || ''),
         altura: String(jugador.altura || ''),
         peso: String(jugador.peso || ''),
@@ -82,7 +93,7 @@ export default function JugadorForm() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Posición</label>
               <select className="input-field" value={form.posicion} onChange={e => setForm({ ...form, posicion: e.target.value })}>
-                {POSICIONES.map(p => <option key={p} value={p} className="capitalize">{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
+                {POSICIONES.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
               </select>
             </div>
             <div>
