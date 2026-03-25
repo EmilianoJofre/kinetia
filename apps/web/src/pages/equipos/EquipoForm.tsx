@@ -58,7 +58,7 @@ export default function EquipoForm() {
       <div className="card max-w-xl">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre del equipo</label>
+            <label className="form-label">Nombre del equipo</label>
             <input
               className="input-field"
               value={form.nombre}
@@ -69,7 +69,7 @@ export default function EquipoForm() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
+              <label className="form-label">Categoría</label>
               <input
                 className="input-field"
                 value={form.categoria}
@@ -79,7 +79,7 @@ export default function EquipoForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Temporada</label>
+              <label className="form-label">Temporada</label>
               <input
                 className="input-field"
                 value={form.temporada}
@@ -90,7 +90,7 @@ export default function EquipoForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Entrenador principal</label>
+            <label className="form-label">Entrenador principal</label>
             <input
               className="input-field"
               value={form.entrenador}
@@ -100,7 +100,7 @@ export default function EquipoForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">URL del logo (opcional)</label>
+            <label className="form-label">URL del logo (opcional)</label>
             <input
               className="input-field"
               value={form.logo_url}

@@ -69,7 +69,7 @@ export default function LesionForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Jugador</label>
+              <label className="form-label">Jugador</label>
               <select
                 className="input-field"
                 value={form.jugador_id}
@@ -83,7 +83,7 @@ export default function LesionForm() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de lesión</label>
+              <label className="form-label">Tipo de lesión</label>
               <input
                 className="input-field"
                 value={form.tipo}
@@ -94,7 +94,7 @@ export default function LesionForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+            <label className="form-label">Descripción</label>
             <textarea
               className="input-field resize-none"
               rows={3}
@@ -105,7 +105,7 @@ export default function LesionForm() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de inicio</label>
+              <label className="form-label">Fecha de inicio</label>
               <input
                 type="date"
                 className="input-field"
@@ -115,7 +115,7 @@ export default function LesionForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Retorno estimado (opcional)</label>
+              <label className="form-label">Retorno estimado (opcional)</label>
               <input
                 type="date"
                 className="input-field"
@@ -125,7 +125,7 @@ export default function LesionForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+            <label className="form-label">Estado</label>
             <select
               className="input-field"
               value={form.estado}

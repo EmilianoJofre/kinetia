@@ -8,10 +8,10 @@ import type { Usuario } from '../../types'
 import { Pencil, UserX } from 'lucide-react'
 
 const rolBadge = (rol: string) => {
-  const map: Record<string, string> = {
-    admin: 'bg-purple-100 text-purple-700',
-    entrenador: 'bg-blue-100 text-blue-700',
-    analista: 'bg-teal-100 text-teal-700'
+  const cls: Record<string, string> = {
+    admin: 'badge-danger',
+    entrenador: 'badge-info',
+    analista: 'badge-success'
   }
   const labels: Record<string, string> = {
     admin: 'Administrador',
@@ -19,7 +19,7 @@ const rolBadge = (rol: string) => {
     analista: 'Analista'
   }
   return (
-    <span className={`px-2 py-1 text-xs rounded-full font-medium ${map[rol] || 'bg-gray-100 text-gray-600'}`}>
+    <span className={cls[rol] || 'badge-neutral'}>
       {labels[rol] || rol}
     </span>
   )
@@ -43,18 +43,16 @@ export default function UsuariosList() {
     {
       key: 'nombre', header: 'Nombre', render: (u: Usuario) => (
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0">
+          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0">
             {u.nombre.charAt(0).toUpperCase()}
           </div>
-          <div>
-            <p className="font-medium text-text-primary">{u.nombre}</p>
-          </div>
+          <p className="font-medium text-text-primary">{u.nombre}</p>
         </div>
       )
     },
     {
       key: 'email', header: 'Correo electrónico', render: (u: Usuario) => (
-        <span className="text-gray-600">{u.email}</span>
+        <span className="text-text-secondary">{u.email}</span>
       )
     },
     {
@@ -62,14 +60,14 @@ export default function UsuariosList() {
     },
     {
       key: 'activo', header: 'Estado', render: (u: Usuario) => (
-        <span className={`px-2 py-1 text-xs rounded-full font-medium ${u.activo ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+        <span className={u.activo ? 'badge-success' : 'badge-neutral'}>
           {u.activo ? 'Activo' : 'Inactivo'}
         </span>
       )
     },
     {
       key: 'created_at', header: 'Registrado', render: (u: Usuario) => (
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-text-secondary">
           {new Date(u.created_at).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}
         </span>
       )
@@ -79,13 +77,13 @@ export default function UsuariosList() {
         <div className="flex gap-2">
           <button
             onClick={(e) => { e.stopPropagation(); navigate(`/usuarios/${u.id}/editar`) }}
-            className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors"
+            className="action-btn"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleDeactivate(u.id, u.nombre) }}
-            className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
+            className="action-btn-danger"
             title="Desactivar usuario"
           >
             <UserX size={14} />

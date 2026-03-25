@@ -28,20 +28,20 @@ export default function Sidebar() {
   }
 
   return (
-    <div className={`flex flex-col bg-primary text-white transition-all duration-300 ${collapsed ? 'w-16' : 'w-64'} min-h-screen relative`}>
+    <div className={`flex flex-col bg-sidebar text-white transition-all duration-300 ${collapsed ? 'w-16' : 'w-64'} min-h-screen relative shrink-0`}>
       {/* Logo */}
       <div className="flex items-center justify-between p-4 border-b border-white/10">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">K</span>
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">K</span>
             </div>
             <span className="font-bold text-lg tracking-wide">Kinetia</span>
           </div>
         )}
         {collapsed && (
-          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mx-auto">
-            <span className="text-primary font-bold text-sm">K</span>
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mx-auto">
+            <span className="text-white font-bold text-sm">K</span>
           </div>
         )}
         <button
@@ -61,7 +61,7 @@ export default function Sidebar() {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150 text-sm font-medium ${
                 isActive
-                  ? 'bg-accent text-primary'
+                  ? 'bg-primary text-white'
                   : 'text-white/70 hover:bg-white/10 hover:text-white'
               }`
             }

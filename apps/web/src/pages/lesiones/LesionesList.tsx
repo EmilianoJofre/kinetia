@@ -31,29 +31,29 @@ export default function LesionesList() {
   const columns = [
     {
       key: 'jugador_id', header: 'Jugador', render: (l: Lesion) => (
-        <span className="font-medium">{jugadorNombre(l.jugador_id)}</span>
+        <span className="font-medium text-text-primary">{jugadorNombre(l.jugador_id)}</span>
       )
     },
     {
       key: 'tipo', header: 'Tipo de lesión', render: (l: Lesion) => (
-        <span className="capitalize">{l.tipo}</span>
+        <span className="capitalize text-text-primary">{l.tipo}</span>
       )
     },
     {
       key: 'fecha_inicio', header: 'Inicio', render: (l: Lesion) => (
-        <span className="text-sm">{new Date(l.fecha_inicio).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+        <span className="text-sm text-text-primary">{new Date(l.fecha_inicio).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
       )
     },
     {
       key: 'fecha_estimada_retorno', header: 'Retorno estimado', render: (l: Lesion) => (
         l.fecha_estimada_retorno
-          ? <span className="text-sm">{new Date(l.fecha_estimada_retorno).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
-          : <span className="text-gray-400">—</span>
+          ? <span className="text-sm text-text-primary">{new Date(l.fecha_estimada_retorno).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+          : <span className="text-text-secondary">—</span>
       )
     },
     {
       key: 'estado', header: 'Estado', render: (l: Lesion) => (
-        <span className={`px-2 py-1 text-xs rounded-full font-medium ${l.estado === 'activa' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+        <span className={l.estado === 'activa' ? 'badge-danger' : 'badge-success'}>
           {l.estado === 'activa' ? 'Activa' : 'Recuperada'}
         </span>
       )
@@ -63,13 +63,13 @@ export default function LesionesList() {
         <div className="flex gap-2">
           <button
             onClick={(e) => { e.stopPropagation(); navigate(`/lesiones/${l.id}/editar`) }}
-            className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors"
+            className="action-btn"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleDelete(l.id) }}
-            className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
+            className="action-btn-danger"
           >
             <Trash2 size={14} />
           </button>

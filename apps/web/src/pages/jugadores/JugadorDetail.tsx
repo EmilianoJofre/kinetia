@@ -15,7 +15,7 @@ export default function JugadorDetail() {
   })
 
   if (isLoading) return <LoadingSpinner />
-  if (!jugador) return <div className="text-center py-8 text-gray-400">Jugador no encontrado</div>
+  if (!jugador) return <div className="text-center py-8 text-text-secondary">Jugador no encontrado</div>
 
   const avgRating = jugador.estadisticas?.length
     ? (jugador.estadisticas.reduce((sum: number, e: any) => sum + (e.rating || 0), 0) / jugador.estadisticas.length).toFixed(1)
@@ -40,17 +40,17 @@ export default function JugadorDetail() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-4">
-          <button onClick={() => navigate(-1)} className="p-2 rounded-lg hover:bg-surface border border-border transition-colors">
+          <button onClick={() => navigate(-1)} className="p-2 rounded-lg hover:bg-surface border border-border transition-colors text-text-primary">
             <ArrowLeft size={16} />
           </button>
           <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl">
             {jugador.numero || '?'}
           </div>
           <div>
-            <h1 className="text-2xl font-bold">{jugador.nombre} {jugador.apellido}</h1>
+            <h1 className="text-2xl font-bold text-text-primary">{jugador.nombre} {jugador.apellido}</h1>
             <div className="flex items-center gap-2 mt-1">
               <span className="px-2 py-0.5 bg-accent/10 text-accent text-xs rounded-full font-medium capitalize">{jugador.posicion}</span>
-              <span className="text-sm text-gray-500">{jugador.equipo}</span>
+              <span className="text-sm text-text-secondary">{jugador.equipo}</span>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function JugadorDetail() {
           { label: 'Dorsal', value: `#${jugador.numero}` },
         ].map(({ label, value }) => (
           <div key={label} className="card text-center">
-            <p className="text-xs text-gray-500">{label}</p>
+            <p className="text-xs text-text-secondary">{label}</p>
             <p className="text-xl font-bold text-text-primary mt-1">{value}</p>
           </div>
         ))}
@@ -83,8 +83,8 @@ export default function JugadorDetail() {
           { label: 'Rating promedio', value: avgRating },
         ].map(({ label, value }) => (
           <div key={label} className="card text-center">
-            <p className="text-xs text-gray-500">{label}</p>
-            <p className="text-2xl font-bold text-accent mt-1">{value}</p>
+            <p className="text-xs text-text-secondary">{label}</p>
+            <p className="text-2xl font-bold text-primary mt-1">{value}</p>
           </div>
         ))}
       </div>
@@ -94,23 +94,23 @@ export default function JugadorDetail() {
         <ChartCard title="Rendimiento por partido">
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={ratingData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis dataKey="partido" tick={{ fontSize: 11 }} />
-              <YAxis domain={[0, 10]} tick={{ fontSize: 11 }} />
-              <Tooltip />
-              <Line type="monotone" dataKey="rating" stroke="#18DAAE" strokeWidth={2} dot={{ fill: '#18DAAE' }} name="Rating" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="partido" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <YAxis domain={[0, 10]} tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <Tooltip contentStyle={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }} />
+              <Line type="monotone" dataKey="rating" stroke="#FC5200" strokeWidth={2} dot={{ fill: '#FC5200' }} name="Rating" />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
         <ChartCard title="Evolución física">
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={physicalData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis dataKey="fecha" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="fecha" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <Tooltip contentStyle={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }} />
               <Line type="monotone" dataKey="peso" stroke="#2563EB" strokeWidth={2} name="Peso (kg)" />
-              <Line type="monotone" dataKey="velocidad" stroke="#18DAAE" strokeWidth={2} name="Velocidad (km/h)" />
+              <Line type="monotone" dataKey="velocidad" stroke="#00C853" strokeWidth={2} name="Velocidad (km/h)" />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
@@ -119,10 +119,10 @@ export default function JugadorDetail() {
       {/* Lesiones */}
       {jugador.lesiones && jugador.lesiones.length > 0 && (
         <div className="card">
-          <h3 className="text-base font-semibold mb-4">Historial de lesiones</h3>
+          <h3 className="text-base font-semibold text-text-primary mb-4">Historial de lesiones</h3>
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs text-gray-500 uppercase border-b border-border">
+              <tr className="text-left text-xs text-text-secondary uppercase border-b border-border">
                 <th className="pb-2">Tipo</th>
                 <th className="pb-2">Inicio</th>
                 <th className="pb-2">Retorno estimado</th>
@@ -132,11 +132,11 @@ export default function JugadorDetail() {
             <tbody className="divide-y divide-border">
               {jugador.lesiones.map((l: any) => (
                 <tr key={l.id}>
-                  <td className="py-2">{l.tipo}</td>
-                  <td className="py-2">{l.fecha_inicio}</td>
-                  <td className="py-2">{l.fecha_estimada_retorno || '—'}</td>
+                  <td className="py-2 text-text-primary">{l.tipo}</td>
+                  <td className="py-2 text-text-primary">{l.fecha_inicio}</td>
+                  <td className="py-2 text-text-primary">{l.fecha_estimada_retorno || '—'}</td>
                   <td className="py-2">
-                    <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${l.estado === 'activa' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                    <span className={l.estado === 'activa' ? 'badge-danger' : 'badge-success'}>
                       {l.estado === 'activa' ? 'Activa' : 'Recuperada'}
                     </span>
                   </td>

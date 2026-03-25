@@ -39,13 +39,13 @@ export default function EquiposList() {
         <div className="flex gap-2">
           <button
             onClick={(ev) => { ev.stopPropagation(); navigate(`/equipos/${e.id}/editar`) }}
-            className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors"
+            className="action-btn"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={(ev) => { ev.stopPropagation(); handleDelete(e.id, e.nombre) }}
-            className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
+            className="action-btn-danger"
           >
             <Trash2 size={14} />
           </button>

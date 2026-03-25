@@ -77,7 +77,7 @@ export default function UsuarioForm() {
       <div className="card max-w-md">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+            <label className="form-label">Nombre completo</label>
             <input
               className="input-field"
               value={form.nombre}
@@ -87,7 +87,7 @@ export default function UsuarioForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+            <label className="form-label">Correo electrónico</label>
             <input
               type="email"
               className="input-field"
@@ -99,7 +99,7 @@ export default function UsuarioForm() {
           </div>
           {!isEdit && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+              <label className="form-label">Contraseña</label>
               <input
                 type="password"
                 className="input-field"
@@ -109,11 +109,11 @@ export default function UsuarioForm() {
                 placeholder="••••••••"
                 minLength={6}
               />
-              <p className="text-xs text-gray-400 mt-1">Mínimo 6 caracteres</p>
+              <p className="text-xs text-text-secondary mt-1">Mínimo 6 caracteres</p>
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+            <label className="form-label">Rol</label>
             <select
               className="input-field"
               value={form.rol}
@@ -131,7 +131,7 @@ export default function UsuarioForm() {
                 onChange={e => setForm({ ...form, activo: e.target.checked })}
                 className="w-4 h-4 accent-accent"
               />
-              <label htmlFor="activo" className="text-sm font-medium text-gray-700">Usuario activo</label>
+              <label htmlFor="activo" className="form-label">Usuario activo</label>
             </div>
           )}
           {mutation.isError && <p className="text-red-500 text-sm">Error al guardar. Verifica los datos.</p>}

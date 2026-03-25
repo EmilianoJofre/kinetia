@@ -9,7 +9,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts'
 
-const COLORS = ['#18DAAE', '#2563EB', '#F59E0B', '#EF4444']
+const CHART_COLORS = ['#FC5200', '#00C853', '#F59E0B', '#EF4444']
 
 export default function Dashboard() {
   const { data, isLoading } = useQuery({
@@ -24,7 +24,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-text-primary">Dashboard</h1>
-        <p className="text-sm text-gray-500 mt-0.5">Resumen de rendimiento del equipo</p>
+        <p className="text-sm text-text-secondary mt-0.5">Resumen de rendimiento del equipo</p>
       </div>
 
       {/* Metric Cards */}
@@ -64,12 +64,12 @@ export default function Dashboard() {
         <ChartCard title="Producción por Partido (últimos partidos)">
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={data.rendimiento_equipo}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis dataKey="fecha" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip />
-              <Line type="monotone" dataKey="tries" stroke="#18DAAE" strokeWidth={2} dot={{ fill: '#18DAAE' }} name="Tries" />
-              <Line type="monotone" dataKey="puntos" stroke="#2563EB" strokeWidth={2} dot={{ fill: '#2563EB' }} name="Puntos" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="fecha" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <Tooltip contentStyle={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }} />
+              <Line type="monotone" dataKey="tries" stroke="#FC5200" strokeWidth={2} dot={{ fill: '#FC5200' }} name="Tries" />
+              <Line type="monotone" dataKey="puntos" stroke="#00C853" strokeWidth={2} dot={{ fill: '#00C853' }} name="Puntos" />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
@@ -87,10 +87,10 @@ export default function Dashboard() {
                 dataKey="value"
               >
                 {data.resultados_partidos.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip contentStyle={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }} />
               <Legend />
             </PieChart>
           </ResponsiveContainer>
@@ -102,12 +102,12 @@ export default function Dashboard() {
         <ChartCard title="Top Jugadores por Impacto">
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.top_jugadores} layout="vertical" margin={{ left: 80 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis type="number" tick={{ fontSize: 11 }} />
-              <YAxis dataKey="nombre" type="category" tick={{ fontSize: 10 }} width={80} />
-              <Tooltip />
-              <Bar dataKey="tries" stackId="a" fill="#18DAAE" radius={[0, 0, 0, 0]} name="Tries" />
-              <Bar dataKey="tackles" stackId="a" fill="#2563EB" radius={[0, 4, 4, 0]} name="Tackles" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis type="number" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <YAxis dataKey="nombre" type="category" tick={{ fontSize: 10, fill: 'var(--color-text-secondary)' }} width={80} />
+              <Tooltip contentStyle={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }} />
+              <Bar dataKey="tries" stackId="a" fill="#FC5200" radius={[0, 0, 0, 0]} name="Tries" />
+              <Bar dataKey="tackles" stackId="a" fill="#00C853" radius={[0, 4, 4, 0]} name="Tackles" />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
@@ -115,13 +115,13 @@ export default function Dashboard() {
         <ChartCard title="Evolución Física del Equipo">
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={data.evolucion_fisica}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis dataKey="fecha" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="fecha" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <Tooltip contentStyle={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }} />
               <Legend />
               <Line type="monotone" dataKey="peso" stroke="#2563EB" strokeWidth={2} name="Peso (kg)" />
-              <Line type="monotone" dataKey="velocidad" stroke="#18DAAE" strokeWidth={2} name="Velocidad (km/h)" />
+              <Line type="monotone" dataKey="velocidad" stroke="#FC5200" strokeWidth={2} name="Velocidad (km/h)" />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>

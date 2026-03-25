@@ -9,11 +9,11 @@ import type { SesionEntrenamiento } from '../../types'
 import { Pencil, Trash2 } from 'lucide-react'
 
 const intensidadBadge = (intensidad: string) => {
-  const map: Record<string, string> = {
-    baja: 'bg-green-100 text-green-700',
-    media: 'bg-yellow-100 text-yellow-700',
-    alta: 'bg-orange-100 text-orange-700',
-    maxima: 'bg-red-100 text-red-700'
+  const cls: Record<string, string> = {
+    baja: 'badge-success',
+    media: 'badge-warning',
+    alta: 'badge-warning',
+    maxima: 'badge-danger'
   }
   const labels: Record<string, string> = {
     baja: 'Baja',
@@ -22,7 +22,7 @@ const intensidadBadge = (intensidad: string) => {
     maxima: 'Máxima'
   }
   return (
-    <span className={`px-2 py-1 text-xs rounded-full font-medium ${map[intensidad] || 'bg-gray-100 text-gray-600'}`}>
+    <span className={cls[intensidad] || 'badge-neutral'}>
       {labels[intensidad] || intensidad}
     </span>
   )
@@ -48,17 +48,17 @@ export default function EntrenamientosList() {
   const columns = [
     {
       key: 'fecha', header: 'Fecha', render: (s: SesionEntrenamiento) => (
-        <span className="text-sm">{new Date(s.fecha).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+        <span className="text-sm text-text-primary">{new Date(s.fecha).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
       )
     },
     {
       key: 'equipo_id', header: 'Equipo', render: (s: SesionEntrenamiento) => (
-        <span className="font-medium">{equipoNombre(s.equipo_id)}</span>
+        <span className="font-medium text-text-primary">{equipoNombre(s.equipo_id)}</span>
       )
     },
     {
       key: 'tipo', header: 'Tipo', render: (s: SesionEntrenamiento) => (
-        <span className="capitalize">{s.tipo}</span>
+        <span className="capitalize text-text-primary">{s.tipo}</span>
       )
     },
     {
@@ -66,12 +66,12 @@ export default function EntrenamientosList() {
     },
     {
       key: 'duracion', header: 'Duración', render: (s: SesionEntrenamiento) => (
-        <span>{s.duracion} min</span>
+        <span className="text-text-primary">{s.duracion} min</span>
       )
     },
     {
       key: 'asistentes', header: 'Asistentes', render: (s: SesionEntrenamiento) => (
-        <span>{s.asistentes} jugadores</span>
+        <span className="text-text-primary">{s.asistentes} jugadores</span>
       )
     },
     {
@@ -79,13 +79,13 @@ export default function EntrenamientosList() {
         <div className="flex gap-2">
           <button
             onClick={(e) => { e.stopPropagation(); navigate(`/entrenamientos/${s.id}/editar`) }}
-            className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors"
+            className="action-btn"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleDelete(s.id) }}
-            className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
+            className="action-btn-danger"
           >
             <Trash2 size={14} />
           </button>

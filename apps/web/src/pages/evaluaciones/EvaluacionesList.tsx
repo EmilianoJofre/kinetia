@@ -31,32 +31,32 @@ export default function EvaluacionesList() {
   const columns = [
     {
       key: 'fecha', header: 'Fecha', render: (e: EvaluacionFisica) => (
-        <span className="text-sm">{new Date(e.fecha).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+        <span className="text-sm text-text-primary">{new Date(e.fecha).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
       )
     },
     {
       key: 'jugador_id', header: 'Jugador', render: (e: EvaluacionFisica) => (
-        <span className="font-medium">{jugadorNombre(e.jugador_id)}</span>
+        <span className="font-medium text-text-primary">{jugadorNombre(e.jugador_id)}</span>
       )
     },
     {
       key: 'peso', header: 'Peso', render: (e: EvaluacionFisica) => (
-        <span>{e.peso} kg</span>
+        <span className="text-text-primary">{e.peso} kg</span>
       )
     },
     {
       key: 'velocidad_maxima', header: 'Vel. máx.', render: (e: EvaluacionFisica) => (
-        <span>{e.velocidad_maxima} km/h</span>
+        <span className="text-text-primary">{e.velocidad_maxima} km/h</span>
       )
     },
     {
       key: 'vo2_max', header: 'VO2 máx', render: (e: EvaluacionFisica) => (
-        <span>{e.vo2_max}</span>
+        <span className="text-text-primary">{e.vo2_max}</span>
       )
     },
     {
       key: 'notas', header: 'Notas', render: (e: EvaluacionFisica) => (
-        <span className="text-gray-500 text-xs truncate max-w-xs block">
+        <span className="text-text-secondary text-xs truncate max-w-xs block">
           {e.notas ? (e.notas.length > 60 ? e.notas.slice(0, 60) + '...' : e.notas) : '—'}
         </span>
       )
@@ -66,13 +66,13 @@ export default function EvaluacionesList() {
         <div className="flex gap-2">
           <button
             onClick={(ev) => { ev.stopPropagation(); navigate(`/evaluaciones/${e.id}/editar`) }}
-            className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors"
+            className="action-btn"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={(ev) => { ev.stopPropagation(); handleDelete(e.id) }}
-            className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
+            className="action-btn-danger"
           >
             <Trash2 size={14} />
           </button>

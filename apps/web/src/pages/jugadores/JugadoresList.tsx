@@ -22,12 +22,12 @@ export default function JugadoresList() {
   }
 
   const columns = [
-    { key: 'numero', header: '#', render: (j: Jugador) => <span className="font-bold text-accent">{j.numero}</span> },
+    { key: 'numero', header: '#', render: (j: Jugador) => <span className="font-bold text-primary">{j.numero}</span> },
     {
       key: 'nombre', header: 'Jugador', render: (j: Jugador) => (
         <div>
           <p className="font-medium">{j.nombre} {j.apellido}</p>
-          <p className="text-xs text-gray-500">{j.equipo}</p>
+          <p className="text-xs text-text-secondary">{j.equipo}</p>
         </div>
       )
     },
@@ -41,7 +41,7 @@ export default function JugadoresList() {
     { key: 'peso', header: 'Peso', render: (j: Jugador) => `${j.peso} kg` },
     {
       key: 'activo', header: 'Estado', render: (j: Jugador) => (
-        <span className={`px-2 py-1 text-xs rounded-full font-medium ${j.activo ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+        <span className={j.activo ? 'badge-success' : 'badge-neutral'}>
           {j.activo ? 'Activo' : 'Inactivo'}
         </span>
       )
@@ -49,10 +49,10 @@ export default function JugadoresList() {
     {
       key: 'actions', header: 'Acciones', render: (j: Jugador) => (
         <div className="flex gap-2">
-          <button onClick={(e) => { e.stopPropagation(); navigate(`/jugadores/${j.id}/editar`) }} className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors">
+          <button onClick={(e) => { e.stopPropagation(); navigate(`/jugadores/${j.id}/editar`) }} className="action-btn">
             <Pencil size={14} />
           </button>
-          <button onClick={(e) => { e.stopPropagation(); handleDelete(j.id, j.nombre) }} className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors">
+          <button onClick={(e) => { e.stopPropagation(); handleDelete(j.id, j.nombre) }} className="action-btn-danger">
             <Trash2 size={14} />
           </button>
         </div>

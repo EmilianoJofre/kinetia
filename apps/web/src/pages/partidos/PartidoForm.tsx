@@ -77,7 +77,7 @@ export default function PartidoForm() {
       <div className="card max-w-xl">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Fecha y hora</label>
+            <label className="form-label">Fecha y hora</label>
             <input
               type="datetime-local"
               className="input-field"
@@ -88,7 +88,7 @@ export default function PartidoForm() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Equipo local</label>
+              <label className="form-label">Equipo local</label>
               <select
                 className="input-field"
                 value={form.equipo_local_id}
@@ -100,7 +100,7 @@ export default function PartidoForm() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Equipo visitante</label>
+              <label className="form-label">Equipo visitante</label>
               <select
                 className="input-field"
                 value={form.equipo_visitante_id}
@@ -113,7 +113,7 @@ export default function PartidoForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Competición</label>
+            <label className="form-label">Competición</label>
             <input
               type="text"
               className="input-field"
@@ -124,7 +124,7 @@ export default function PartidoForm() {
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Puntos local</label>
+              <label className="form-label">Puntos local</label>
               <input
                 type="number"
                 min="0"
@@ -134,7 +134,7 @@ export default function PartidoForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Puntos visitante</label>
+              <label className="form-label">Puntos visitante</label>
               <input
                 type="number"
                 min="0"
@@ -144,7 +144,7 @@ export default function PartidoForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+              <label className="form-label">Estado</label>
               <select
                 className="input-field"
                 value={form.estado}

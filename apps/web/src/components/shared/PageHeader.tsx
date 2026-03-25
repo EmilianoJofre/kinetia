@@ -15,13 +15,13 @@ export default function PageHeader({ title, subtitle, actionLabel, actionPath, s
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3">
         {showBack && (
-          <button onClick={() => navigate(-1)} className="p-2 rounded-lg hover:bg-surface border border-border transition-colors">
+          <button onClick={() => navigate(-1)} className="p-2 rounded-lg hover:bg-surface border border-border transition-colors text-text-primary">
             <ArrowLeft size={16} />
           </button>
         )}
         <div>
           <h1 className="text-2xl font-bold text-text-primary">{title}</h1>
-          {subtitle && <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>}
+          {subtitle && <p className="text-sm text-text-secondary mt-0.5">{subtitle}</p>}
         </div>
       </div>
       {actionLabel && actionPath && (

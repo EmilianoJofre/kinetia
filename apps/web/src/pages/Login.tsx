@@ -43,11 +43,11 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-2xl mb-4 shadow-lg">
-            <Activity size={32} className="text-primary" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-4 shadow-lg">
+            <Activity size={32} className="text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white">Kinetia</h1>
-          <p className="text-white/60 mt-1 text-sm">Plataforma de Rendimiento Deportivo</p>
+          <p className="text-white/70 mt-1 text-sm">Plataforma de Rendimiento Deportivo</p>
         </div>
 
         {/* Card */}
@@ -55,14 +55,14 @@ export default function Login() {
           <h2 className="text-xl font-semibold text-text-primary mb-6">Iniciar sesión</h2>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-4">
+            <div className="badge-danger rounded-lg px-4 py-3 text-sm mb-4 w-full justify-start">
               {error}
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+              <label className="form-label">Correo electrónico</label>
               <input
                 type="email"
                 value={email}
@@ -73,7 +73,7 @@ export default function Login() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+              <label className="form-label">Contraseña</label>
               <input
                 type="password"
                 value={password}
@@ -97,7 +97,7 @@ export default function Login() {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-surface px-2 text-gray-400">o</span>
+              <span className="bg-surface px-2 text-text-secondary">o</span>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export default function Login() {
           >
             Explorar demo
           </button>
-          <p className="text-center text-xs text-gray-400 mt-3">
+          <p className="text-center text-xs text-text-secondary mt-3">
             Acceso de prueba: demo@kinetia.app / demo123
           </p>
         </div>

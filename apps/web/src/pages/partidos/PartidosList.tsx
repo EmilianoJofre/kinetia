@@ -8,21 +8,17 @@ import type { Partido } from '../../types'
 import { Pencil, Trash2 } from 'lucide-react'
 
 const estadoBadge = (estado: Partido['estado']) => {
-  const map = {
-    programado: 'bg-blue-100 text-blue-700',
-    en_curso: 'bg-green-100 text-green-700',
-    finalizado: 'bg-gray-100 text-gray-600'
+  const cls = {
+    programado: 'badge-info',
+    en_curso: 'badge-success',
+    finalizado: 'badge-neutral'
   }
   const labels = {
     programado: 'Programado',
     en_curso: 'En curso',
     finalizado: 'Finalizado'
   }
-  return (
-    <span className={`px-2 py-1 text-xs rounded-full font-medium ${map[estado]}`}>
-      {labels[estado]}
-    </span>
-  )
+  return <span className={cls[estado]}>{labels[estado]}</span>
 }
 
 export default function PartidosList() {
@@ -42,22 +38,22 @@ export default function PartidosList() {
   const columns = [
     {
       key: 'fecha', header: 'Fecha', render: (p: Partido) => (
-        <span className="text-sm">{new Date(p.fecha).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+        <span className="text-sm text-text-primary">{new Date(p.fecha).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
       )
     },
     {
       key: 'equipos', header: 'Partido', render: (p: Partido) => (
         <div className="flex items-center gap-2">
-          <span className="font-medium">{p.equipo_local}</span>
-          <span className="text-gray-400 text-xs">vs</span>
-          <span className="font-medium">{p.equipo_visitante}</span>
+          <span className="font-medium text-text-primary">{p.equipo_local}</span>
+          <span className="text-text-secondary text-xs">vs</span>
+          <span className="font-medium text-text-primary">{p.equipo_visitante}</span>
         </div>
       )
     },
     {
       key: 'resultado', header: 'Resultado', render: (p: Partido) => (
         p.estado === 'programado'
-          ? <span className="text-gray-400 text-sm">—</span>
+          ? <span className="text-text-secondary text-sm">—</span>
           : <span className="font-bold text-lg text-text-primary">{p.puntos_local} — {p.puntos_visitante}</span>
       )
     },
@@ -69,13 +65,13 @@ export default function PartidosList() {
         <div className="flex gap-2">
           <button
             onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.id}/editar`) }}
-            className="p-1.5 text-gray-500 hover:text-secondary rounded transition-colors"
+            className="action-btn"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleDelete(p.id) }}
-            className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
+            className="action-btn-danger"
           >
             <Trash2 size={14} />
           </button>

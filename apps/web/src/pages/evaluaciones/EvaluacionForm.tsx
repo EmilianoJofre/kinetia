@@ -79,7 +79,7 @@ export default function EvaluacionForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Jugador</label>
+              <label className="form-label">Jugador</label>
               <select
                 className="input-field"
                 value={form.jugador_id}
@@ -93,7 +93,7 @@ export default function EvaluacionForm() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+              <label className="form-label">Fecha</label>
               <input
                 type="date"
                 className="input-field"
@@ -105,7 +105,7 @@ export default function EvaluacionForm() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Peso (kg)</label>
+              <label className="form-label">Peso (kg)</label>
               <input
                 type="number"
                 step="0.1"
@@ -116,7 +116,7 @@ export default function EvaluacionForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Velocidad máxima (km/h)</label>
+              <label className="form-label">Velocidad máxima (km/h)</label>
               <input
                 type="number"
                 step="0.1"
@@ -129,7 +129,7 @@ export default function EvaluacionForm() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Resistencia</label>
+              <label className="form-label">Resistencia</label>
               <input
                 type="number"
                 step="0.1"
@@ -140,7 +140,7 @@ export default function EvaluacionForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Fuerza</label>
+              <label className="form-label">Fuerza</label>
               <input
                 type="number"
                 step="0.1"
@@ -151,7 +151,7 @@ export default function EvaluacionForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Agilidad</label>
+              <label className="form-label">Agilidad</label>
               <input
                 type="number"
                 step="0.1"
@@ -162,7 +162,7 @@ export default function EvaluacionForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">VO2 máx</label>
+              <label className="form-label">VO2 máx</label>
               <input
                 type="number"
                 step="0.1"
@@ -174,7 +174,7 @@ export default function EvaluacionForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notas (opcional)</label>
+            <label className="form-label">Notas (opcional)</label>
             <textarea
               className="input-field resize-none"
               rows={3}

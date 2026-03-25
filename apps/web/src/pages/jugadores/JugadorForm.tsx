@@ -81,23 +81,23 @@ export default function JugadorForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+              <label className="form-label">Nombre</label>
               <input className="input-field" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} required />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+              <label className="form-label">Apellido</label>
               <input className="input-field" value={form.apellido} onChange={e => setForm({ ...form, apellido: e.target.value })} required />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Posición</label>
+              <label className="form-label">Posición</label>
               <select className="input-field" value={form.posicion} onChange={e => setForm({ ...form, posicion: e.target.value })}>
                 {POSICIONES.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Equipo</label>
+              <label className="form-label">Equipo</label>
               <select className="input-field" value={form.equipo_id} onChange={e => setForm({ ...form, equipo_id: e.target.value })} required>
                 <option value="">Seleccionar equipo</option>
                 {equipos.map(eq => <option key={eq.id} value={eq.id}>{eq.nombre}</option>)}
@@ -106,19 +106,19 @@ export default function JugadorForm() {
           </div>
           <div className="grid grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Edad</label>
+              <label className="form-label">Edad</label>
               <input type="number" className="input-field" value={form.edad} onChange={e => setForm({ ...form, edad: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Altura (m)</label>
+              <label className="form-label">Altura (m)</label>
               <input type="number" step="0.01" className="input-field" value={form.altura} onChange={e => setForm({ ...form, altura: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Peso (kg)</label>
+              <label className="form-label">Peso (kg)</label>
               <input type="number" step="0.1" className="input-field" value={form.peso} onChange={e => setForm({ ...form, peso: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Dorsal</label>
+              <label className="form-label">Dorsal</label>
               <input type="number" className="input-field" value={form.numero} onChange={e => setForm({ ...form, numero: e.target.value })} />
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function JugadorForm() {
                 onChange={e => setForm({ ...form, activo: e.target.checked })}
                 className="w-4 h-4 accent-accent"
               />
-              <label htmlFor="activo" className="text-sm font-medium text-gray-700">Jugador activo</label>
+              <label htmlFor="activo" className="form-label">Jugador activo</label>
             </div>
           )}
           {mutation.isError && <p className="text-red-500 text-sm">Error al guardar. Verifica los datos.</p>}
