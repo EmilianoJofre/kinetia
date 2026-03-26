@@ -1,10 +1,9 @@
-import { Bell, Search, Sun, Moon } from 'lucide-react'
+import { Bell, Search } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
-import { useTheme } from '../../context/ThemeContext'
+import ThemeToggle from '../shared/ThemeToggle'
 
 export default function Header() {
   const { user } = useAuth()
-  const { theme, toggleTheme } = useTheme()
 
   return (
     <header className="bg-surface border-b border-border px-6 py-3 flex items-center justify-between">
@@ -18,14 +17,7 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-2">
-        {/* Theme toggle */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 text-text-secondary hover:text-primary rounded-lg hover:bg-background transition-colors"
-          title={theme === 'light' ? 'Activar modo oscuro' : 'Activar modo claro'}
-        >
-          {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-        </button>
+        <ThemeToggle />
 
         {/* Notifications */}
         <button className="relative p-2 text-text-secondary hover:text-primary rounded-lg hover:bg-background transition-colors">
