@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+  # ─── Kinetia ────────────────────────────────────────────────────────────────
   db:
     image: postgres:15-alpine
     restart: unless-stopped
@@ -15,7 +16,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    # No exponemos puerto 5432 al exterior, solo accesible internamente
 
   api:
     build:
@@ -45,13 +45,55 @@ services:
     depends_on:
       - api
 
+  # ─── Panorama ───────────────────────────────────────────────────────────────
+  panorama_db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PANORAMA_DB_USER}
+      POSTGRES_PASSWORD: ${PANORAMA_DB_PASSWORD}
+      POSTGRES_DB: panorama_production
+    volumes:
+      - panorama_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PANORAMA_DB_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  panorama_api:
+    build:
+      context: ./panorama/backend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://${PANORAMA_DB_USER}:${PANORAMA_DB_PASSWORD}@panorama_db:5432/panorama_production
+      RAILS_ENV: production
+      SECRET_KEY_BASE: ${PANORAMA_SECRET_KEY_BASE}
+      RAILS_MASTER_KEY: ${PANORAMA_RAILS_MASTER_KEY}
+      FRONTEND_URL: https://panorama.kinetia.cl
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "false"
+    depends_on:
+      panorama_db:
+        condition: service_healthy
+
+  panorama_web:
+    build:
+      context: ./panorama/frontend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    depends_on:
+      - panorama_api
+
+  # ─── Caddy (reverse proxy compartido) ───────────────────────────────────────
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
-      - "443:443/udp"   # HTTP/3
+      - "443:443/udp"
     volumes:
       - ./infra/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
@@ -60,9 +102,12 @@ services:
     depends_on:
       - api
       - web
+      - panorama_api
+      - panorama_web
 
 volumes:
   postgres_data:
+  panorama_postgres_data:
   caddy_data:
   caddy_config:
   caddy_logs:

@@ -7,12 +7,21 @@
 node_modules/
 apps/web/dist/
 
-# Rails
+# Rails — Kinetia
 apps/api/tmp/
 apps/api/log/
 apps/api/*.log
 apps/api/storage/
 apps/api/.bundle/
+
+# Panorama
+panorama/frontend/node_modules/
+panorama/frontend/dist/
+panorama/backend/tmp/
+panorama/backend/log/
+panorama/backend/storage/
+panorama/backend/.bundle/
+panorama/backend/config/master.key
 
 # macOS
 .DS_Store

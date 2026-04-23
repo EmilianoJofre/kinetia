@@ -1,22 +1,35 @@
+# ─── Kinetia ────────────────────────────────────────────────────────────────
 kinetia.cl {
-    # API Rails: rutas /api/* van al contenedor api
     handle /api/* {
         reverse_proxy api:3000
     }
 
-    # Frontend React: todo lo demás va al contenedor web (nginx)
     handle {
         reverse_proxy web:80
     }
 
-    # Logs
     log {
         output file /var/log/caddy/kinetia.log
         format json
     }
 }
 
-# Redirigir www → apex
 www.kinetia.cl {
     redir https://kinetia.cl{uri} permanent
+}
+
+# ─── Panorama ───────────────────────────────────────────────────────────────
+panorama.kinetia.cl {
+    handle /api/* {
+        reverse_proxy panorama_api:3000
+    }
+
+    handle {
+        reverse_proxy panorama_web:80
+    }
+
+    log {
+        output file /var/log/caddy/panorama.log
+        format json
+    }
 }
