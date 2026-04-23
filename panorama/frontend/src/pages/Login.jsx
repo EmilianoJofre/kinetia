@@ -20,6 +20,20 @@ export default function Login() {
 
   const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }))
 
+  const handleDemoLogin = async () => {
+    setError('')
+    setLoading(true)
+    try {
+      const data = await login('viajero@gmail.com', 'password123')
+      signIn(data.token, data.user)
+      navigate('/')
+    } catch {
+      setError('Error al entrar con demo')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
@@ -193,6 +207,42 @@ export default function Login() {
           >
             {loading ? 'Cargando...' : (isRegister ? 'Crear cuenta' : 'Ingresar')}
           </button>
+
+          {!isRegister && (
+            <>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: '4px 0' }}>
+                <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+                <span style={{ fontSize: '12px', color: 'var(--muted)' }}>o</span>
+                <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+              </div>
+              <button
+                type="button"
+                onClick={handleDemoLogin}
+                disabled={loading}
+                style={{
+                  padding: '14px',
+                  borderRadius: '12px',
+                  background: 'transparent',
+                  color: 'var(--text)',
+                  fontWeight: 600,
+                  fontSize: '15px',
+                  border: '1px solid var(--border)',
+                  cursor: loading ? 'wait' : 'pointer',
+                  opacity: loading ? 0.7 : 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  transition: 'border-color 0.2s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+              >
+                <span style={{ fontSize: '18px' }}>🧭</span>
+                Entrar como demo
+              </button>
+            </>
+          )}
         </form>
 
         <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '14px', color: 'var(--muted)' }}>
